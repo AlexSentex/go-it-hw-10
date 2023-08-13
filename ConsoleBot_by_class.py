@@ -119,7 +119,10 @@ def handler(command: str, args) -> str:
             title = '|{:^15}|{:^15}|\n'.format('Username', 'Phone')
             for username, rec in ab.items():
                 if rec.phones:
-                    title += '|{:^15}|{:^15}|\n'.format(username.title(), rec.phones[0].value)
+                    title += '|{:^15}|{:^15}|\n'.format(
+                                                        username.title(),
+                                                        rec.phones[0].value
+                                                        )
                     if len(rec.phones) == 1:
                         continue
                     for num in rec.phones[1:]:
@@ -172,16 +175,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    ab = AddressBook()
-    name = Name('Bill')
-    phone = Phone('1234567890')
-    rec = Record(name, phone)
-    ab.add_record(rec)
-    assert isinstance(ab['Bill'], Record)
-    assert isinstance(ab['Bill'].name, Name)
-    assert isinstance(ab['Bill'].phones, list)
-    assert isinstance(ab['Bill'].phones[0], Phone)
-    assert ab['Bill'].phones[0].value == '1234567890'
-    print('All Ok)')
-
+    
     main()
