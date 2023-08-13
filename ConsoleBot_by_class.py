@@ -80,7 +80,7 @@ def handler(command: str, args) -> str:
         return 'Hello!\nHow can I help you?'
 
 
-    def add(name: str, phone: str) -> str:
+    def add(name: str, phone='') -> str:
         '''Add user number into database'''
         if phone.isnumeric():
             phone = Phone(phone)
@@ -88,14 +88,17 @@ def handler(command: str, args) -> str:
             if name in ab.keys():
                 ab[name].phones.append(phone)
                 return 'Done'
-            
+                
             name = Name(name)
-
             rec = Record(name, phone)
             ab[rec.name.value] = rec
-
             return 'Done'
-        raise IndexError
+        
+        name = Name(name)
+        rec = Record(name)
+        ab[rec.name.value] = rec
+
+        return 'Done'
 
 
     def change(name, old_number, new_number) -> str:
@@ -140,7 +143,9 @@ def handler(command: str, args) -> str:
     if command == 'hello':
         return greet()
     elif command == 'add':
-        return add(args[0], args[1])
+        if len(args) > 1:
+            return add(args[0], args[1])
+        return add(args[0])
     elif command == 'change':
         return change(args[0], args[1], args[2])
     elif command == 'phone':
@@ -175,5 +180,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    
+    ab = AddressBook()
     main()
