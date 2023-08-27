@@ -3,7 +3,10 @@ import time
 
 
 class AddressBook(UserDict):
+    '''AddressBook that contains names and numbers'''
+
     def __init__(self) -> None:
+        
         self.data = {}
 
     def add_record(self, record):
@@ -19,12 +22,6 @@ class Record:
             if phone not in self.phones:
                 self.phones.append(phone)
 
-    def delete(self, phone):
-        try:
-            self.phones.remove[phone]
-        except:
-            print('Phone not found')
-
     def edit(self, phone_to_edit, new_phone):
         pass
 
@@ -33,6 +30,7 @@ class Field:
 
 
 class Name(Field):
+    '''Contains name'''
     def __init__(self, name) -> None:
         self.value = name
 
